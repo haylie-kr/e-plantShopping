@@ -301,7 +301,21 @@ const handleRemoveFromCart = (prodcut) => {
                             <div className='product-title'>{item.name}</div>
                             <div className='product-cost'>{item.cost}</div>
                             <div className='product-description'>{item.description}</div>
-                            <button  className={`product-button ${addedToCart[item.name] ? 'added-to-cart' : ''}`} onClick={addedToCart[item.name] ? () => handleAddToCart(item) : () => handleRemoveFromCart(item)}>{addedToCart[item.name] ? 'Added to Cart' : 'Add to Cart'}</button>
+                            {addedToCart[item.name] ? (
+                            <button
+                                className="product-button added-to-cart"
+                                onClick={() => handleRemoveFromCart(item)}
+                            >
+                                Added to Cart
+                            </button>
+                        ) : (
+                            <button
+                                className="product-button"
+                                onClick={() => handleAddToCart(item)}
+                            >
+                                Add to Cart
+                            </button>
+                        )}                       
                         </div>
                     ))}
                     </div>
