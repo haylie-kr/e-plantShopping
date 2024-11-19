@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import {useDispatch} from 'react-redux';
 import './ProductList.css'
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
@@ -233,6 +234,7 @@ function ProductList() {
     fontSize: '30px',
     textDecoration: 'none',
    }
+   const dispatch = useDispatch();
    const handleCartClick = (e) => {
     e.preventDefault();
     setShowCart(true); // Set showCart to true when cart icon is clicked
@@ -245,7 +247,7 @@ const handlePlantsClick = (e) => {
 
 const handleAddToCart = (product) => {
     dispatch(addItem(product));
-    setAddedToCart((prevState)=> ({
+    setaddedToCart((prevState)=> ({
         ...prevState,
         [product.name]: true,
     }));
