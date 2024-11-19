@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
   name: 'cart',
   initialState: {
     items: [], // Initialize items as an empty array
+    totalItems: 0
   },
   reducers: {
     addItem: (state, action) => {
@@ -14,9 +15,11 @@ import { createSlice } from '@reduxjs/toolkit';
         } else {
           state.items.push({ name, image, cost, quantity: 1 });
         }
+        state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
     },
     removeItem: (state, action) => {
         state.items = state.items.filter(item=>item.name !== action.payload);
+        state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
     },
     updateQuantity: (state, action) => {
         const {name, quantity} = action.payload;
@@ -24,7 +27,7 @@ import { createSlice } from '@reduxjs/toolkit';
         if (itemToUpdate) {
             itemToUpdate.quantity = quantity;
         }
-    
+        state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
     },
   },
 });
